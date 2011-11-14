@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="managedurbanairshipformonodroid.sample">
+	<application android:label="managedurbanairshipformonodroid.sample" android:debuggable="true">
+		<!-- REQUIRED -->
+		<receiver android:name="com.urbanairship.CoreReceiver">
+			<!-- REQUIRED IntentFilter - For Helium and Hybrid -->
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+				<action android:name="android.intent.action.ACTION_SHUTDOWN" />
+			</intent-filter>
+		</receiver>
+		<!-- REQUIRED for C2DM and Hybrid -->
+		<receiver android:name="com.urbanairship.push.c2dm.C2DMPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+			<!-- Receive the actual message -->
+			<intent-filter>
+              <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+              <!-- MODIFICATION REQUIRED - Use your package name as the category -->
+              <category android:name="managedurbanairshipformonodroid.sample" />
+	          </intent-filter>
+	          <!-- Receive the registration id -->
+	          <intent-filter>
+	              <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+	              <!-- MODIFICATION REQUIRED - Use your package name as the category -->
+	              <category android:name="managedurbanairshipformonodroid.sample" />
+	          </intent-filter>
+		</receiver>
+		<!-- REQUIRED -->
+		<!-- The 'android:process' parameter is optional. Set it to a value starting
+            with a colon (:) to make it run in a separate,
+            private process -->
+		<service android:name="com.urbanairship.push.PushService"/>
+		
+	
+	</application>
+	<uses-sdk />
+	
+	<permission android:name="managedurbanairshipformonodroid.sample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="managedurbanairshipformonodroid.sample.permission.C2D_MESSAGE" />
+    
+    <!-- This app has permission to register and receive message -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+</manifest>
